@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.5-0.9999.3 (TeX Live 2013) (format=xelatex 2014.1.19)  31 MAR 2014 13:07
+This is XeTeX, Version 3.1415926-2.5-0.9999.3 (TeX Live 2013) (format=xelatex 2014.1.19)  31 MAR 2014 21:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1298,8 +1298,7 @@ LaTeX Info: Redefining \LaTeXe on input line 219.
 . * 'bold italic' with NFSS spec.:
 . <->"Times New Roman/BI/ICU:mapping=tex-text;"
 .................................................
-)
-No file lab_book.aux.
+) (./lab_book.aux)
 \openout1 = `lab_book.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 160.
@@ -1322,6 +1321,7 @@ LaTeX Font Info:    Checking defaults for EU1/lmr/m/n on input line 160.
 LaTeX Font Info:    ... okay on input line 160.
 LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 160.
 LaTeX Font Info:    Try loading font information for T3+cmr on input line 160.
+
 (/usr/share/texmf-dist/tex/latex/tipa/t3cmr.fd
 File: t3cmr.fd 2001/12/31 TIPA font definitions
 )
@@ -1381,12 +1381,10 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 160.
 LaTeX Info: Redefining \pageref on input line 160.
 LaTeX Info: Redefining \nameref on input line 160.
+
+(./lab_book.out) (./lab_book.out)
 \@outlinefile=\write4
 \openout4 = `lab_book.out'.
-
-
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
 
 LaTeX Info: Redefining \microtypecontext on input line 160.
 Package microtype Info: Character protrusion enabled (level 2).
@@ -1548,6 +1546,7 @@ Package microtype Info: Character `\.z' is missing
 Package microtype Info: Character `\v z' is missing
 (microtype)             in font `\EU1/SimSun(0)/m/n/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
+
 *** you should *not* be loading the inputenc package
 *** XeTeX expects the source to be in UTF8 encoding
 *** some features of other encodings may conflict, resulting in poor output.
@@ -1641,15 +1640,14 @@ Package microtype Info: Loading generic settings for font family
 No file lab_book.ind.
 Package tocbasic Info: character protrusion at toc deactivated on input line 17
 8.
+(./lab_book.toc)
 \tf@toc=\write5
 \openout5 = `lab_book.toc'.
 
 
+
 LaTeX Font Warning: Font shape `EU1/SimSun(0)/m/sl' undefined
 (Font)              using `EU1/SimSun(0)/m/n' instead on input line 179.
-
-
-LaTeX Warning: Reference `LastPage' on page 3 undefined on input line 179.
 
 [3
 
@@ -1720,79 +1718,38 @@ Underfull \hbox (badness 10000) in paragraph at lines 199--200
 
  []
 
-
-LaTeX Warning: Citation `lamport94' on page 4 undefined on input line 201.
-
-
-LaTeX Warning: Reference `LastPage' on page 4 undefined on input line 207.
-
 [4]
 
 LaTeX Font Warning: Font shape `EU1/SimSun(0)/m/it' undefined
 (Font)              using `EU1/SimSun(0)/m/n' instead on input line 222.
 
 File: placeholder.png Graphic file (type QTm)
-<use  "placeholder.png" >
-
-LaTeX Warning: Reference `fig:placeholder' on page 5 undefined on input line 24
-0.
-
-
-LaTeX Warning: Reference `LastPage' on page 5 undefined on input line 244.
-
-[5]
-
-LaTeX Warning: Reference `LastPage' on page 6 undefined on input line 266.
-
-[6]
-
-LaTeX Warning: Reference `eq:emc' on page 7 undefined on input line 281.
-
-
-LaTeX Warning: Reference `LastPage' on page 7 undefined on input line 287.
-
-[7]
-No file lab_book.brf.
+<use  "placeholder.png" > [5] [6] [7] (./lab_book.brf)
 \tf@brf=\write6
 \openout6 = `lab_book.brf'.
 
-
-LaTeX Warning: Reference `LastPage' on page 8 undefined on input line 309.
-
-[8]
-
-Package lastpage Warning: Rerun to get the references right on input line 322.
-
+ [8]
 
 AED: lastpage setting LastPage
-
-LaTeX Warning: Reference `LastPage' on page 9 undefined on input line 322.
-
 [9
 
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 322.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 322.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 324.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 324.
  (./lab_book.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 322.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 322.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 324.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 324.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 27261 strings out of 495657
- 508194 string characters out of 6187924
- 677044 words of memory out of 5000000
- 30060 multiletter control sequences out of 15000+600000
+ 27281 strings out of 495657
+ 508285 string characters out of 6187924
+ 679218 words of memory out of 5000000
+ 30070 multiletter control sequences out of 15000+600000
  23751 words of font info for 96 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  52i,11n,47p,847b,515s stack positions out of 5000i,500n,10000p,200000b,80000s

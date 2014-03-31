@@ -87,7 +87,7 @@
 \addtokomafont{caption}{\footnotesize\itshape} % Small italic font size for captions
 \addtokomafont{captionlabel}{\upshape\bfseries} % Bold for caption labels
 \addtokomafont{descriptionlabel}{\rmfamily}
-\setcapwidth[c]{10cm} % Right align caption text c is "center", l is "left", r is "right"
+\setcapwidth[r]{10cm} % Right align caption text
 \setkomafont{footnote}{\sffamily} % Footnotes in sans serif
 
 \deffootnote[4cm]{4cm}{1em}{\textsuperscript{\thefootnotemark}} % Indent footnotes to line up with text
@@ -137,7 +137,7 @@
     pdfview=FitB]{hyperref}
 
 \usepackage[stretch=10]{microtype} % Slightly tweak font spacing for aesthetics
-\usepackage{zhfontcfg}
+
 %\setlength\parindent{0pt} % Uncomment to remove all indentation from paragraphs
 
 %----------------------------------------------------------------------------------------
@@ -147,13 +147,13 @@
 % Template: \newexperiment{<abbrev>}[<short form>]{<long form>}
 % <abbrev> is the reference to use later in the .tex file in \experiment{}, the <short form> is only used in the table of contents and running title - it is optional, <long form> is what is printed in the lab book itself
 
-\newexperiment{example}[实验例程1]{这是一个实验例程}
-\newexperiment{example2}[实验例程2]{这是另外一个实验例程}
-\newexperiment{example3}[实验例程3]{这又是另外一个实验例程}
+\newexperiment{example}[Example experiment]{This is an example experiment}
+\newexperiment{example2}[Example experiment 2]{This is another example experiment}
+\newexperiment{example3}[Example experiment 3]{This is yet another example experiment}
 
-\newsubexperiment{subexp_example}[子实验例程1]{这是子实验例程1}
-\newsubexperiment{subexp_example2}[子实验例程2]{这是子实验例程2}
-\newsubexperiment{subexp_example3}[子实验例程3]{这是子实验例程3}
+\newsubexperiment{subexp_example}[Example sub-experiment]{This is an example sub-experiment}
+\newsubexperiment{subexp_example2}[Example sub-experiment 2]{This is another example sub-experiment}
+\newsubexperiment{subexp_example3}[Example sub-experiment 3]{This is yet another example sub-experiment}
 
 %----------------------------------------------------------------------------------------
 
@@ -178,7 +178,7 @@
 \tableofcontents % Table of contents
 \newpage % Start lab look on a new page
 
-\begin{addmargin}[0cm]{0cm} % Makes the text width much shorter for a compact look
+\begin{addmargin}[4cm]{0cm} % Makes the text width much shorter for a compact look
 
 \pagestyle{scrheadings} % Begin using headers
 
@@ -229,9 +229,7 @@ Citation example \cite{lamport94}.
 \lipsum[4]
 
 \begin{figure}[h!]
-%\raggedleft
-\centering
-%\captionsetup{justification=centering}
+\raggedleft
 \includegraphics[scale=0.5,keepaspectratio=true]{placeholder.png}
 \caption{Placeholder image.}
 \label{fig:placeholder}
