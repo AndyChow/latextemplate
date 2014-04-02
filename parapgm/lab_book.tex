@@ -93,7 +93,7 @@
 \deffootnote[4cm]{4cm}{1em}{\textsuperscript{\thefootnotemark}} % Indent footnotes to line up with text
 
 \DeclareFixedFont{\textcap}{T1}{phv}{bx}{n}{1.5cm} % Font for main title: Helvetica 1.5 cm
-\DeclareFixedFont{\textaut}{T1}{phv}{bx}{n}{0.8cm} % Font for author name: Helvetica 0.8 cm
+\DeclareFixedFont{\textaut}{OT1}{phv}{bx}{n}{0.8cm} % Font for author name: Helvetica 0.8 cm
 
 \usepackage[nouppercase,headsepline]{scrpage2} % Provides headers and footers configuration
 \pagestyle{scrheadings} % Print the headers and footers on all pages
@@ -147,7 +147,7 @@
 % Template: \newexperiment{<abbrev>}[<short form>]{<long form>}
 % <abbrev> is the reference to use later in the .tex file in \experiment{}, the <short form> is only used in the table of contents and running title - it is optional, <long form> is what is printed in the lab book itself
 
-\newexperiment{example}[实验例程1]{这是一个实验例程}
+\newexperiment{quicksort}[快速排序]{快速排序算法}
 \newexperiment{example2}[实验例程2]{这是另外一个实验例程}
 \newexperiment{example3}[实验例程3]{这又是另外一个实验例程}
 
@@ -163,13 +163,14 @@
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
 
-\title{\textcap{Laboratory Journal \\[1cm]  
-\textaut{Beginning 30-05-2012}}}
+\title{\textcap{高级并行程序设计实验 \\[1cm]  
+\textaut{Beginning 02-04-2014}}}
 
 \author{
-    %\textaut{John Smith}\\ \\ % Your name
-	\erhao\hei{周永强} \\
-    Master of Science % Your degree
+    %\textaut{周永强 Yongqiang Zhou}\\ \\ % Your name
+	\erhao\hei{周永强} \\[1cm]
+	\large{大号字}
+	\kai{六院八队} % Your degree
 }
 \date{} % No date by default, add \today if you wish to include the publication date
 
@@ -193,8 +194,8 @@
 
 %-----------------------------------------
 
-\experiment{example}
-
+\experiment{quicksort}
+快速排序并行算法
 \lipsum[2]
 
 Footnote example\footnote{Lorem ipsum dolor sit amet, consectetuer adipiscing elit.}.\\
