@@ -137,8 +137,16 @@
     pdfview=FitB]{hyperref}
 
 \usepackage[stretch=10]{microtype} % Slightly tweak font spacing for aesthetics
-\usepackage{zhfontcfg}
+
 %\setlength\parindent{0pt} % Uncomment to remove all indentation from paragraphs
+
+\usepackage{zhfontcfg}% Chinese fonts
+\usepackage{indentfirst} % indention for Chinese
+\setlength{\parindent}{2em}
+
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
 
 %----------------------------------------------------------------------------------------
 %	DEFINITION OF EXPERIMENTS
@@ -148,8 +156,6 @@
 % <abbrev> is the reference to use later in the .tex file in \experiment{}, the <short form> is only used in the table of contents and running title - it is optional, <long form> is what is printed in the lab book itself
 
 \newexperiment{quicksort}[快速排序]{快速排序算法}
-\newexperiment{example2}[实验例程2]{这是另外一个实验例程}
-\newexperiment{example3}[实验例程3]{这又是另外一个实验例程}
 
 \newsubexperiment{subexp_example}[子实验例程1]{这是子实验例程1}
 \newsubexperiment{subexp_example2}[子实验例程2]{这是子实验例程2}
@@ -163,14 +169,13 @@
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
 
-\title{\textcap{高级并行程序设计实验 \\[1cm]  
-\textaut{Beginning 02-04-2014}}}
+\title{\textcap{高级并行程序设计实验} \\[1cm]  
+\textaut{Beginning 02-04-2014}}
 
 \author{
     %\textaut{周永强 Yongqiang Zhou}\\ \\ % Your name
-	\erhao\hei{周永强} \\[1cm]
-	\large{大号字}
-	\kai{六院八队} % Your degree
+	\erhao{\hei{周永强}} \\[1cm]
+	\fzqt{六院八队} % Your degree
 }
 \date{} % No date by default, add \today if you wish to include the publication date
 
@@ -178,6 +183,7 @@
 
 \printindex
 \tableofcontents % Table of contents
+
 \newpage % Start lab look on a new page
 
 \begin{addmargin}[0cm]{0cm} % Makes the text width much shorter for a compact look
@@ -187,125 +193,78 @@
 %----------------------------------------------------------------------------------------
 %	LAB BOOK CONTENTS
 %----------------------------------------------------------------------------------------
-
-\labday{Friday, 1 June 2012}
-这里可以输入正文，这里可以写快速排序的介绍，后面的可以加入详细的描述，比如思路分析，算法描述，编写代码，性能评价等，对比不同线程数时程序运行的时间，性能评价要加入图表分析，可以用gunplot绘图，真是很爽啊！
-\lipsum[1]
+%----------------------------------------------------------------------------------------
+% 实验一：快速排序算法
+%----------------------------------------------------------------------------------------
+\labday{快速排序}
+快速排序是一种基本的排序算法，其时间复杂度为$O(n\log{n})$，它的基本思
+想是：对于给定的无序序列$R[1,n]$，从中选取一个元素作为“标兵”（一般选
+取第一个元素或最后一个元素），以“标兵”为基准将序列划分为两个子序列$R[1,i-1]$
+和$R[i,n]$，且左边的无序子区中记录的所有关键字均小于等于基准的关键字，右边的无序子区中记
+录的所有关键字均大于等于基准的关键字，当子序列不空时，递归调用子上述过
+程，程序运行结束时，序列有序。 \\
+\indent 本节中先给出快速排序的串行化算法，然后对算法进行分析，引出并行的快速排
+序算法，并且分别使用\en{MPI}和\en{OpenMP}实现并行的快速排序，最后对算
+法的性能进行评估，给出评价和结果分析。
+%评估主要根据加速比等性能指标，绘制图表
 
 %-----------------------------------------
 
 \experiment{quicksort}
-快速排序并行算法
-\lipsum[2]
+%算法的串行伪代码，并行化分析并行代码
+\begin{algorithm}
+\caption{快速排序算法}\label{ser_quicksort}
+\begin{algorithmic}[1]
+\Function{\color{titleblue}{quicksort}}{$data, i, j$}\Comment{quicksort from i to j}
+   \If{$i<j$}
+       \State $r \gets$ partition($data, i, j$) 
+   \EndIf
+   \State quicksort($data, i, r-1$)
+   \State quicksort($data, r+1, j$)
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
 
-Footnote example\footnote{Lorem ipsum dolor sit amet, consectetuer adipiscing elit.}.\\
-
-Citation example \cite{lamport94}.
+\begin{algorithm}
+\caption{partition算法}\label{partition}
+\begin{algorithmic}[1]
+\Function{partition}{$data, k, l$}
+   \State $pivo \gets data[l]$
+   \State $i \gets k-l$ 
+   \For {$j \gets k,l-1$}
+       \If{$data[i] \le pivo$} %\le <= \ge is >=
+           \State $i \gets i+1$
+           \State exchange $data[i]$ and $data[j]$
+       \EndIf
+   \EndFor
+   \State exchange $data[i+1]$ and $data[l]$
+   \State return $i+1$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
 
 %-----------------------------------------
 
 \subexperiment{subexp_example}
-
-\lipsum[3]
-
-\begin{table}
-\label{tab:treatments_xy}
-%\raggedleft
-\centering
-\begin{tabular}{l l l}
-\toprule
-\textbf{Groups} & \textbf{Treatment X} & \textbf{Treatment Y} \\
-\toprule
-1 & 0.2 & 0.8\\
-2 & 0.17 & 0.7\\
-3 & 0.24 & 0.75\\
-4 & 0.68 & 0.3\\
-\bottomrule\\
-\end{tabular}
-\caption{The effects of treatments X and Y on the four groups studied.}
-\end{table}
+%分析如何用mpi进行实现
 
 %-----------------------------------------
 
 \subexperiment{subexp_example2}
-
-\lipsum[4]
-
-\begin{figure}[h!]
-%\raggedleft
-\centering
-%\captionsetup{justification=centering}
-\includegraphics[scale=0.5,keepaspectratio=true]{example-image-a}
-%\includegraphics[scale=0.5,keepaspectratio=true]{placeholder.png}
-\caption{Placeholder image.}
-\label{fig:placeholder}
-\end{figure}
-
-\lipsum[5]
-
-Example figure citation: \autoref{fig:placeholder}.
+%分析如何用openmp进行实现
 
 %-----------------------------------------
 
 \subexperiment{subexp_example3}
-
-\lipsum[6]
-
-%-----------------------------------------
-
-\experiment{example2}
-
-\lipsum[7]
-
-%-----------------------------------------
-
-\subexperiment{subexp_example}
-
-\lipsum[8]
-
-%-----------------------------------------
-
-\experiment{example3}
-
-\subexperiment{subexp_example}
-  
-\lipsum[9]
+%结论
 
 %----------------------------------------------------------------------------------------
-
-\labday{Saturday, 2 June 2012}
-
-\experiment{example}
-
-\lipsum[10]
-
-\begin{equation}
-\label{eq:emc}
-e = mc^2
-\end{equation}
-
-Example equation citation: \autoref{eq:emc}.
-
-%-----------------------------------------
-
-\subexperiment{subexp_example}
-
-\lipsum[11-13]
-
-%-----------------------------------------
-
-\experiment{example2}
-
-\lipsum[14]
-
-%-----------------------------------------
-
-\subexperiment{subexp_example}
-
-\lipsum[15]
- 
+% 实验二 Cannon方法的矩阵乘
 %----------------------------------------------------------------------------------------
- 
+\labday{矩阵相乘的Cannon方法}
+矩阵相互乘
+\experiment{Cannon方法的矩阵乘}
+
 \end{addmargin}
 
 %----------------------------------------------------------------------------------------
