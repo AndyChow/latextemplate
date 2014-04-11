@@ -1,0 +1,12 @@
+set terminal postscript eps
+set xlabel "进程数"
+set title "单个排序时间"
+unset key
+set xrange [0.5:9]
+set xtics 1,1,9
+#set term pngcairo lw 2 
+set term pdfcairo lw 2 
+set output "analysis.pdf"
+plot "datafile.dat" with linespoints linecolor 3 linewidth 2 pointtype 7 pointsize 2
+set output
+set term wxt

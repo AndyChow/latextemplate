@@ -1,0 +1,45 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 82.35      0.14     0.14        2    70.00    70.00  para_QuickSort
+ 17.65      0.17     0.03        8     3.75     3.75  _fini
+
+		     Call graph (explanation follows)
+
+granularity: each sample hit covers 4 byte(s) for 5.88% of 0.17 seconds
+
+index % time    self  children    called     name
+[1]    100.0    0.17    0.00       6+4       <cycle 1 as a whole> [1]
+                0.14    0.00       2+4867008     para_QuickSort <cycle 1> [2]
+                0.03    0.00       8+3           _fini <cycle 1> [6]
+-----------------------------------------------
+                             4867008             para_QuickSort <cycle 1> [2]
+                                   2             _fini <cycle 1> [6]
+[2]     82.4    0.14    0.00       2+4867008 para_QuickSort <cycle 1> [2]
+                                   2             _fini <cycle 1> [6]
+                             4867008             para_QuickSort <cycle 1> [2]
+-----------------------------------------------
+                                                 <spontaneous>
+[3]     33.3    0.00    0.06                 ErrMsg [3]
+                0.06    0.00       2/6           _fini <cycle 1> [6]
+-----------------------------------------------
+                                                 <spontaneous>
+[4]     33.3    0.00    0.06                 GetDataSize [4]
+                0.06    0.00       2/6           _fini <cycle 1> [6]
+-----------------------------------------------
+                                                 <spontaneous>
+[5]     33.3    0.00    0.06                 Partition [5]
+                0.06    0.00       2/6           _fini <cycle 1> [6]
+-----------------------------------------------
+                                   3             _fini <cycle 1> [6]
+                                   2             para_QuickSort <cycle 1> [2]
+                0.06    0.00       2/6           Partition [5]
+                0.06    0.00       2/6           GetDataSize [4]
+                0.06    0.00       2/6           ErrMsg [3]
+[6]     17.6    0.03    0.00       8+3       _fini <cycle 1> [6]
+                                   2             para_QuickSort <cycle 1> [2]
+                                   3             _fini <cycle 1> [6]
+-----------------------------------------------
+
