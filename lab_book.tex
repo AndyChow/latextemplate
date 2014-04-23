@@ -139,6 +139,9 @@
 
 \usepackage[stretch=10]{microtype} % Slightly tweak font spacing for aesthetics
 \usepackage{zhfontcfg}
+%for source code
+\usepackage{verbments}
+
 %\setlength\parindent{0pt} % Uncomment to remove all indentation from paragraphs
 
 %----------------------------------------------------------------------------------------
@@ -195,7 +198,10 @@
 %-----------------------------------------
 
 \experiment{example}
-
+\begin{pyglist}[language=java]
+	// Hello Java program
+	import java.util.*;
+\end{pyglist}
 \lipsum[2]
 
 Footnote example\footnote{Lorem ipsum dolor sit amet, consectetuer adipiscing elit.}.\\

@@ -7,4 +7,5 @@ compile : lab_book.tex
 
 clean:
 	rm *.log *.idx *.out *.aux *.brf *.pdf *.toc
+	rm *.pyg*
 

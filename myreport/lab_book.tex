@@ -161,6 +161,10 @@
 }
 \usepackage{xcolor}
 
+%source code
+\usepackage{verbments}
+%设定中文等宽字体，否则的话代码中中文显示乱码
+\setmonofont{AR PL UKai CN}
 %----------------------------------------------------------------------------------------
 %	DEFINITION OF EXPERIMENTS
 %----------------------------------------------------------------------------------------
@@ -226,18 +230,31 @@
 
 \experiment{NAPI定义}
 \indent \en{NAPI}使用结构体\en{napi\_struct}描述，如果驱动程序要使用该技术的话，可以在自己的结构体中内嵌实现。在e1000驱动adapter的定义中可以看到napi\_struct的存在。\\
-\begin{lstlisting}[language=C]
+%\begin{lstlisting}[language=C]
+\begin{pyglist}[language=c,caption={e1000.h},listingname=\textbf{Program},
+	listingnamefont=\sffamily\bfseries\color{yellow},%
+        captionfont=\sffamily\color{white},captionbgcolor=gray,
+        fvset={frame=bottomline,framerule=4pt,rulecolor=\color{gray}}
+        ]
 /*e1000.h*/
 struct e1000_adapter {
   /*...*/
+  /*嵌入napi结构*/
   struct napi_struct napi;
   /*...*/
 }
-\end{lstlisting}
+\end{pyglist}
+
+%\end{lstlisting}
 
 \experiment{NAPI注册与初始化}
 \indent napi\_struct在定义以后，必须初始化和注册才能够使用。其初始化与注册是在e1000\_probe函数中完成，该函数是探测函数，会在。。（PCI routine）。。执行。注册函数为： \\ netif\_napi\_add(dev, \&napi, poll, weight) \\前两个参数是设备和napi结构指针，重要的是第三个参数，第三个参数是函数指针，指向使用napi时要使用的轮询函数，在注册的时候必须指明该参数，然后当使用轮询接收数据时，会回调该函数。在e1000驱动中，轮询函数为e1000\_clean。
-\begin{lstlisting}[language=C]
+%\begin{lstlisting}[language=C]
+\begin{pyglist}[language=c,caption={e1000\_probe},listingname=\textbf{Program},
+	listingnamefont=\sffamily\bfseries\color{yellow},%
+        captionfont=\sffamily\color{white},captionbgcolor=gray,
+        fvset={frame=bottomline,framerule=4pt,rulecolor=\color{gray}}
+        ]
 /*e1000_main.c*/
 static int e1000_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 {
@@ -258,7 +275,8 @@ static int e1000_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
   netif_napi_add(netdev, &adapter->napi, e1000_clean, 64);
   /*...*/
 }
-\end{lstlisting}
+\end{pyglist}
+%\end{lstlisting}
 
 \experiment{调度NAPI}
 \indent 在讲napi的调度之前必须先说明一下中断，中断在e1000\_open中注册完成，注册完成后，每当网卡有数据到达，便会产生中断，然后调用中断处理程序，在中断处理程序中禁用中断，并且调度napi轮询接收数据。napi的调度函数为：\\
@@ -268,7 +286,13 @@ if (napi\_schedule\_prep(napi))\\
     \_\_napi\_schedule(napi);\\
 二者的效果一样，只不过后者是先测试当前已经在进行napi调度了。\\
 
-\begin{lstlisting}[language=C]
+%\begin{lstlisting}[language=C]
+\begin{pyglist}[language=c,caption={e1000\_open},listingname=\textbf{Program},
+	listingnamefont=\sffamily\bfseries\color{yellow},%
+        captionfont=\sffamily\color{white},captionbgcolor=gray,
+        fvset={frame=bottomline,framerule=4pt,rulecolor=\color{gray}}
+        ]
+/*e1000_open*/
 static int e1000_open(struct net_device *netdev)
 {
     struct e1000_adapter *adapter = netdev_priv(netdev);
@@ -316,10 +340,16 @@ static irqreturn_t e1000_intr(int irq, void *data)
     }
     /*...*/
 }
-\end{lstlisting}
+\end{pyglist}
+%\end{lstlisting}
 
 \indent 当napi调度以后，后面的工作便是轮询接收数据，轮询函数已经在e1000\_probe中设定为e1000\_clean。\\
-\begin{lstlisting}[language=C]
+%\begin{lstlisting}[language=C]
+\begin{pyglist}[language=c,caption={e1000\_clean},listingname=\textbf{Program},
+	listingnamefont=\sffamily\bfseries\color{yellow},%
+        captionfont=\sffamily\color{white},captionbgcolor=gray,
+        fvset={frame=bottomline,framerule=4pt,rulecolor=\color{gray}}
+        ]
 static int e1000_clean(struct napi_struct *napi, int budget)
 {
     struct e1000_adapter *adapter = container_of(napi, struct e1000_adapter, napi);
@@ -346,10 +376,17 @@ static int e1000_clean(struct napi_struct *napi, int budget)
     }
     return work_done;
 }
-\end{lstlisting}
+\end{pyglist}
+%\end{lstlisting}
 
 \indent 最后还要看一下clean\_rx函数，这个函数之所以设定成指针是为了灵活使用接收函数，不同型号的网卡可能不一样，但是原理都是一样的，该指针的初始化在e1000\_open函数中的e1000\_configure()中进行设定，而该函数又调用e1000\_configure\_rx进行设定接收函数，假定接收函数被设为e1000\_clean\_rx\_irq（设成其他函数也一样，原理是相同的），接收函数完成功能见代码。\\
-\begin{lstlisting}[language=C]
+%\begin{lstlisting}[language=C]
+\begin{pyglist}[language=c,caption={e1000\_clean\_rx\_irq},listingname=\textbf{Program},
+	listingnamefont=\sffamily\bfseries\color{yellow},%
+        captionfont=\sffamily\color{white},captionbgcolor=gray,
+        fvset={frame=bottomline,framerule=4pt,rulecolor=\color{gray}}
+        ]
+
 static bool e1000_clean_rx_irq(struct e1000_adapter *adapter,
 			       struct e1000_rx_ring *rx_ring,
 			       int *work_done, int work_to_do)
@@ -393,7 +430,8 @@ static bool e1000_clean_rx_irq(struct e1000_adapter *adapter,
     /*...*/
     }
 }
-\end{lstlisting}
+\end{pyglist}
+%\end{lstlisting}
 \experiment{删除NAPI}
 \indent 消注册在网卡消注册的时候进行调用，调用函数为netif\_napi\_del()，具体的代码不再分析。
 
