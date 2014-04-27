@@ -13,3 +13,12 @@ parapgm
 =======
 myreport 中关于napi那一节详细地描述了插入漂亮源代码的latex代码
 可以参考使用
+
+
+magit
+===
+magit-status  显示状态
+s 将untracked的文件加入
+c 写commit message
+C-c C-c commit
+magit-push 提交到远程github
