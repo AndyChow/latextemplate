@@ -1,0 +1,19 @@
+\frametitle{An Algorithm For Finding Primes Numbers.}
+  % verbatim环境中所有latex的命令都失去意义，被视为普通的文本
+  % 如果要使用命令，需要使用semiverbatim，半文本的意思
+\begin{verbatim}
+int main (void)
+{
+    std::vector<bool> is_prime (100, true);
+    for (int i = 2; i < 100; i++)
+        if (is_prime[i])
+        {
+            std::cout << i << " ";
+            for (int j = i; j < 100; is_prime [j] = false, j+=i);
+        }
+    return 0;
+}
+\end{verbatim}
+  \begin{uncoverenv}<2>
+  Note the use of \verb|std::|.
+\end{uncoverenv}

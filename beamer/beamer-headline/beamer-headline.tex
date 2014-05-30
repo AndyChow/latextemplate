@@ -1,0 +1,43 @@
+\documentclass{beamer}
+
+\definecolor{secinhead}{RGB}{249,196,95}
+\definecolor{titlebg}{RGB}{51,51,51}
+
+\setbeamercolor{secsubsec}{fg=secinhead,bg=black}
+\setbeamercolor{frametitle}{fg=secinhead,bg=titlebg}
+
+% headline 为导航里面的字体，设置为空，因为她们根本没有必要存在好吧
+\setbeamertemplate{headline}
+{
+  % \leavevmode%
+  % \hbox{%
+  %   \begin{beamercolorbox}[wd=\paperwidth,ht=8.25ex,dp=3.5ex]{secsubsec}%
+  %     \raggedright
+  %     \hspace*{2em}%
+  %     {\sffamily\Large\color{secinhead}\thesection.~\insertsection\hfill\insertsubsection}%
+  %     \hspace*{2em}%
+  %   \end{beamercolorbox}%
+  % }%
+}
+
+\setbeamertemplate{frametitle}
+{\vskip-3pt
+  \leavevmode
+  \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=5ex,dp=1ex]{frametitle}%
+      \raggedright\hspace*{2em}\small\insertframetitle %最好标题能够居中
+    \end{beamercolorbox}
+  }%
+}
+% 你同样没有存在的必要
+\setbeamertemplate{footline}{}
+
+\begin{document}
+
+\section{Introduction}
+\subsection{The questions}
+\begin{frame}\frametitle{A test frame}Test\end{frame}
+\subsection{Another questions}
+\begin{frame}\frametitle{Another test frame}Test\end{frame}
+
+\end{document}

@@ -1,0 +1,45 @@
+% Copyright 2007 by Till Tantau
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+\ProvidesPackageRCS $Header: /Users/joseph/Documents/LaTeX/beamer/base/themes/theme/beamerthemeSingapore.sty,v d02a7cf4d8ae 2010/06/17 09:11:41 rivanvx $
+
+\RequirePackage{tikz}
+\usetikzlibrary{fadings}
+
+\DeclareOptionBeamer{compress}{\beamer@compresstrue}
+\ProcessOptionsBeamer
+
+\tikzfading[name=fade bottom, top color=transparent!0, bottom color=transparent!100]
+
+\mode<presentation>
+
+\setbeamercolor{section in head/foot}{use=structure,bg=structure.fg!25!bg}
+
+\useoutertheme[subsection=false]{miniframes}
+
+\setbeamertemplate{frametitle}[default][center]
+
+\AtBeginDocument{%
+
+ \newcommand\shading{\tikz\fill[path fading= fade bottom, structure.fg!25!bg] (0cm,0cm) rectangle
+ (\paperwidth,1.3cm);}
+
+  \setbeamercolor{section in head/foot}{bg=}
+}
+
+\addtoheadtemplate{\shading\vskip-1.3cm}{}
+
+% \setbeamertemplate{background canvas}{%
+%  \includegraphics[width=\paperwidth,height=\paperheight]{lighthouse.jpg}}
+
+
+\beamertemplatedotitem
+
+\mode
+<all>
